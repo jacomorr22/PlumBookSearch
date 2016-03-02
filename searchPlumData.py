@@ -15,7 +15,7 @@ class Person:
         self.pay = json['pay']
 
     def __str__(self):
-        return 'ID:\t{}\nName:\t{}\nLoc:\t{}\nAType:\t{}\nOrg:\t{}\nTitle:\t{}\nPPlan:\t{}\nPay:\t{}\n'.format(self.idx,self.name,self.location,self.apptType,self.organization,self.title,self.payPlan,self.pay)
+        return 'ID:\t{}\nName:\t{}\nLoc:\t{}\nAType:\t{}\nOrg:\t{}\nTitle:\t{}\nPPlan:\t{}\nPay:\t{}\n\n'.format(self.idx,self.name,self.location,self.apptType,self.organization,self.title,self.payPlan,self.pay)
 
 
 ##INPUT: name of attribute to create index on i.e 'type_of_appt'
@@ -30,7 +30,7 @@ def createIndex(indName):
 
         ids,col = data['id'],data[indName]
 
-        index.setdefault(org, [])
+        index.setdefault(col, [])
         
         index[col].append(ids)
         
@@ -100,10 +100,9 @@ def chooseIndex():
  
 
     options = list(getIndex(index).keys())
-
-    print(index + ' Choices')
-    
-    print('Please choose term you would like to search for')
+    print()
+    print(index + ' Choices:')
+    print('-' *20)
     searchTerm = getChoice(options)
     print (index,searchTerm)
     return searchIndex(index,searchTerm)
@@ -126,9 +125,9 @@ for per in people:
     
     if searchYN.upper() in ('Y','YES'):        
         if search.lower() in eval('per.'+choice).lower():
-            string.append( str(per) +'\n')
+            string.append( str(per))
     else:
-        string.append(per)
+        string.append(str(per))
         
 print(len(string))
 print(''.join(string)) 
